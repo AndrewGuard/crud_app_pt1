@@ -9,6 +9,11 @@ get '/contacts/new' do
   erb :new
 end
 
+get '/contacts/:id' do
+  @contact = Contact.find(params[:id])
+  erb :show
+end
+
 get '/contacts/:id/edit' do
   @contact = Contact.find(params[:id])
   erb :edit
@@ -32,4 +37,10 @@ post '/contacts/:id' do
   else
     erb :edit
   end
+end
+
+post '/contacts/:id/delete' do
+  @contact = Contact.find(params[:id])
+  @contact.destroy
+  redirect to ('/')
 end
