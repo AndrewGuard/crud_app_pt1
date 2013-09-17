@@ -6,17 +6,30 @@ get '/' do
 end
 
 get '/contacts/new' do
-  @contact = Contact.new(params[:contact])
   erb :new
+end
+
+get '/contacts/:id/edit' do
+  @contact = Contact.find(params[:id])
+  erb :edit
 end
 
 # POST ========================================================
 
 post '/contacts' do
-  @contact = Contact.new(params[:contact])
-  if @contact.save
+  @contact = Contact.create(params[:contact])
+  if @contact.valid?
     redirect to('/')
   else
     erb :new
+  end
+end
+
+post '/contacts/:id' do
+  @contact = Contact.find(params[:id])
+  if @contact.update_attributes(params[:contact])
+    redirect to ('/')
+  else
+    erb :edit
   end
 end

@@ -20,7 +20,7 @@
         <td><%= contact.phone %></td>
         <td><%= contact.email %></td>
         <td>
-          <a href="#">Edit</a>
+          <a href="/contacts/<%= contact.id %>/edit">Edit</a>
           <form action="#" method="POST">
             <input type="submit" value="Delete">
           </form>
