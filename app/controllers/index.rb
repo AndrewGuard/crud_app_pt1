@@ -6,7 +6,7 @@ get '/' do
 end
 
 get '/contacts/new' do
-  erb :new
+  erb :new, layout: !request.xhr?
 end
 
 get '/contacts/:id' do
@@ -24,7 +24,11 @@ end
 post '/contacts' do
   @contact = Contact.create(params[:contact])
   if @contact.valid?
-    redirect to('/')
+    if request.xhr?
+      erb :_contact_row, layout: false, locals: { contact: @contact }
+    else
+      redirect to('/')
+    end
   else
     erb :new
   end

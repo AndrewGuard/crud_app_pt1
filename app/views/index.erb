@@ -13,20 +13,8 @@
   </thead>
   <tbody>
     <% @contacts.each do |contact| %>
-      <tr>
-        <td><a href="/contacts/<%=contact.id %>"><%= contact.id %></a></td>
-        <td><%= contact.first_name %></td>
-        <td><%= contact.last_name %></td>
-        <td><%= contact.phone %></td>
-        <td><%= contact.email %></td>
-        <td>
-          <a href="/contacts/<%= contact.id %>/edit">Edit</a> | <a href="/contacts/<%= contact.id %>/delete">Delete</a>
-<!--           <form action="/contacts/<%#contact.id%>/delete" method="POST">
-            <input type="submit" value="Delete">
-          </form> -->
-        </td>
-      </tr>
+      <%= erb :_contact_row, layout: false, locals: { contact: contact } %>
     <% end %>
   </tbody>
 </table>
-<a href="/contacts/new">Add Contact</a>
+<a id="add_link" href="/contacts/new">Add Contact</a>
